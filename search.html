@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Octopus Browser - Browse Undercover</title>
+  <style>
+    /* 
+      Overall Underwater Vibe:
+      - Subtle gradient background
+      - "Underwater" feeling with watery colors
+    */
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", sans-serif;
+      background: linear-gradient(#a0dfe6, #e0f7fa);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* hide ink splash overflow */
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      width: 180px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .logo h1 {
+      margin: 10px 0 0;
+      font-size: 28px;
+      color: #2b2b2b;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* Search bar styling */
+    .search-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #2b2b2b;
+      border-radius: 6px;
+      outline: none;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #2b2b2b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #484848;
+    }
+
+    /* Results container with watery styling */
+    #results {
+      width: 80%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(4px);
+    }
+    .result-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-left: 4px solid #2b2b2b;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 4px;
+    }
+    .result-item a {
+      font-size: 1.2em;
+      color: #006994;
+      text-decoration: none;
+    }
+    .result-item a:hover {
+      text-decoration: underline;
+    }
+
+    /* Ink splash effect */
+    #ink-splash {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      pointer-events: none; /* so it doesn't interfere with clicks */
+      animation: none;
+    }
+
+    /* Keyframes for the ink splash:
+       It expands quickly and fades out.
+    */
+    @keyframes inkExpand {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+      }
+      70% {
+        transform: translate(-50%, -50%) scale(30);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(30);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <img src="octologo.png" alt="Octopus Browser Logo">
+    <h1>🐙 Octopus Browser</h1>
+  </div>
+
+  <div class="search-container">
+    <input id="searchBox" type="text" placeholder="Search for anything...">
+    <button onclick="doSearch()">Search</button>
+  </div>
+
+  <div id="results"></div>
+
+  <!-- Ink splash overlay -->
+  <div id="ink-splash"></div>
+
+  <script>
+    let searchData = [];
+    // Load results.json
+    fetch('results.json')
+      .then(response => response.json())
+      .then(data => { 
+        searchData = data;
+      })
+      .catch(error => {
+        console.error("Error loading results.json:", error);
+      });
+
+    function doSearch() {
+      // Trigger the ink splash animation
+      inkSplash();
+
+      const query = document.getElementById("searchBox").value.trim().toLowerCase();
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";  // Clear previous results
+
+      if (!query) {
+        resultsDiv.innerHTML = "<p>Please enter a search term.</p>";
+        return;
+      }
+
+      const filtered = searchData.filter(item =>
+        item.title.toLowerCase().includes(query) ||
+        item.text.toLowerCase().includes(query)
+      );
+
+      if (filtered.length === 0) {
+        resultsDiv.innerHTML = "<p>No results found.</p>";
+        return;
+      }
+
+      filtered.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "result-item";
+        div.innerHTML = `
+          <a href="${item.url}" target="_blank">${item.title}</a>
+          <p>${item.text}</p>
+        `;
+        resultsDiv.appendChild(div);
+      });
+    }
+
+    function inkSplash() {
+      const ink = document.getElementById("ink-splash");
+      // Reset any previous animation
+      ink.style.animation = 'none';
+      // Force reflow to restart the animation
+      void ink.offsetWidth; 
+      // Set the new animation
+      ink.style.animation = 'inkExpand 1s forwards';
+    }
+  </script>
+</body>
+</html>

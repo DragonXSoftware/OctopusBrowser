@@ -1,0 +1,102 @@
+[
+    {
+      "title": "YouTube",
+      "url": "https://www.youtube.com/",
+      "text": "The official video sharing platform. Search for videos, channels, and more."
+    },
+    {
+      "title": "Facebook",
+      "url": "https://www.facebook.com/",
+      "text": "Connect with friends and the world around you on Facebook."
+    },
+    {
+      "title": "Wikipedia",
+      "url": "https://www.wikipedia.org/",
+      "text": "A free online encyclopedia with articles on virtually every topic."
+    },
+    {
+      "title": "Google",
+      "url": "https://www.google.com/",
+      "text": "The world's most popular search engine."
+    },
+    {
+      "title": "Twitter",
+      "url": "https://www.twitter.com/",
+      "text": "A social networking service where users post and interact with messages known as tweets."
+    },
+    {
+      "title": "Instagram",
+      "url": "https://www.instagram.com/",
+      "text": "A photo and video sharing social networking service."
+    },
+    {
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/",
+      "text": "A professional networking site to connect with colleagues and find job opportunities."
+    },
+    {
+      "title": "Reddit",
+      "url": "https://www.reddit.com/",
+      "text": "A network of communities based on people's interests."
+    },
+    {
+      "title": "Amazon",
+      "url": "https://www.amazon.com/",
+      "text": "An online shopping platform for a wide variety of products."
+    },
+    {
+      "title": "Netflix",
+      "url": "https://www.netflix.com/",
+      "text": "A streaming service for movies and TV shows."
+    },
+    {
+      "title": "Pinterest",
+      "url": "https://www.pinterest.com/",
+      "text": "A visual discovery engine for finding ideas like recipes, home and style inspiration, and more."
+    },
+    {
+      "title": "Quora",
+      "url": "https://www.quora.com/",
+      "text": "A platform to ask questions and connect with people who contribute unique insights and quality answers."
+    },
+    {
+      "title": "Yahoo",
+      "url": "https://www.yahoo.com/",
+      "text": "A web services provider offering search, news, email, and more."
+    },
+    {
+      "title": "Bing",
+      "url": "https://www.bing.com/",
+      "text": "A search engine from Microsoft."
+    },
+    {
+      "title": "eBay",
+      "url": "https://www.ebay.com/",
+      "text": "An online auction and shopping website."
+    },
+    {
+      "title": "Tumblr",
+      "url": "https://www.tumblr.com/",
+      "text": "A microblogging and social networking website."
+    },
+    {
+      "title": "Flickr",
+      "url": "https://www.flickr.com/",
+      "text": "An image and video hosting service."
+    },
+    {
+      "title": "Dropbox",
+      "url": "https://www.dropbox.com/",
+      "text": "A file hosting service that offers cloud storage and file synchronization."
+    },
+    {
+      "title": "SoundCloud",
+      "url": "https://www.soundcloud.com/",
+      "text": "An online audio distribution platform and music sharing website."
+    },
+    {
+      "title": "Spotify",
+      "url": "https://www.spotify.com/",
+      "text": "A digital music service that gives you access to millions of songs."
+    }
+]

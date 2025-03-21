@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Octopus Search Results</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .result {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .result h3 {
+            margin: 0;
+        }
+        .result a {
+            color: #1a0dab;
+            text-decoration: none;
+        }
+        .result a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐙 Search Results</h1>
+    <div id="results">Loading results...</div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get("q");
+
+        fetch("https://api.duckduckgo.com/?q=" + encodeURIComponent(query) + "&format=json&no_redirect=1&no_html=1")
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById("results");
+                container.innerHTML = "";
+
+                if (!data.RelatedTopics || data.RelatedTopics.length === 0) {
+                    container.innerHTML = "<p>No results found.</p>";
+                    return;
+                }
+
+                data.RelatedTopics.forEach(item => {
+                    if (item.Text && item.FirstURL) {
+                        const div = document.createElement("div");
+                        div.className = "result";
+                        div.innerHTML = `
+                            <h3><a href="${item.FirstURL}" target="_blank">${item.Text}</a></h3>
+                        `;
+                        container.appendChild(div);
+                    }
+                });
+            })
+            .catch(err => {
+                document.getElementById("results").innerHTML = "<p>Error loading results. Check your internet connection.</p>";
+                console.error(err);
+            });
+    </script>
+</body>
+</html>
